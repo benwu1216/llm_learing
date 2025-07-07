@@ -1,0 +1,17 @@
+.python-version
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+data
+.env
+*.csv
+*.ipynb
+*.zip
+*.tar.gz
+*.tar
+results
+outputs
+test.py
+.env*
