@@ -84,22 +84,32 @@ workflow.add_edge("classification_node", "entity_extraction")
 workflow.add_edge("entity_extraction", "summarization")
 workflow.add_edge("summarization", END)
 # 编译图
-app = workflow.compile()
+agent = workflow.compile()
 
-# 定义一段关于 Anthropic 的 MCP 的样本文本
 sample_text = """
-Anthropic's MCP (Model Context Protocol) is an open-source powerhouse that lets
+An agent in LangChain is an intelligent decision-making system that leverages a language model to reason 
+about and execute actions using external tools. Unlike static chains, which follow a fixed sequence of steps, 
+agents dynamically determine the next step based on the current context and available tools. Powered by prompt 
+engineering and output parsing, LangChain agents can analyze instructions, invoke relevant tools such as search 
+engines, calculators, or APIs, and iteratively refine their responses. This makes them highly adaptable for tasks 
+like multi-step reasoning, tool-augmented question answering, and interactive dialogue systems.
 """
+
 # 构造包含样本文本的初始 state
 state_input = {"text": sample_text}
 # 运行 agent 的全流程
-result = app.invoke(state_input)
+result = agent.invoke(state_input)
+
 # 输出各个部分的结果：
-# - 分类结果（News、Blog、Research 或 Other）
+# 分类结果（News、Blog、Research 或 Other）
 print("Classification:", result["classification"])
-# - 提取出的实体（人名、组织、地点等）
-print("\nEntities:", result["entities"])
-# - 生成的文本摘要
+
+# 提取出的实体（人名、组织、地点等）
+print("\nEntities:")
+for entity in result["entities"]:
+	print(entity)
+
+# 生成的文本摘要
 print("\nSummary:", result["summary"])
 
 

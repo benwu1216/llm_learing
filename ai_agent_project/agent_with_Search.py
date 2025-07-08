@@ -27,9 +27,8 @@ config = {"configurable": {"thread_id": "abc123"}}
 while True:
     query = input("请输入问题:")
     for chunk in agent_executor.stream(
-        {"messages": [HumanMessage(content=query)]}, config
+        {"messages": [HumanMessage(content=query)]}, config, stream_mode="values"
     ):
-        print(chunk)
-        print("----")
+        chunk["messages"][-1].pretty_print()
     print('\n')
 

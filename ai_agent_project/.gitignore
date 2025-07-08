@@ -7,7 +7,6 @@ __pycache__/
 data
 .env
 *.csv
-*.ipynb
 *.zip
 *.tar.gz
 *.tar
